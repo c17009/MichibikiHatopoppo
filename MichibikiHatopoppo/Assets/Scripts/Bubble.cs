@@ -27,11 +27,11 @@ public class Bubble: MonoBehaviour {
         BrokenBubble();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if(collision.tag == "WindZone")
+        if(collider.tag == "WindZone")
         {
-            rb2d.AddForce(transform.right * forceReceiveFromWind, ForceMode2D.Impulse);
+            rb2d.AddForce(collider.transform.right * forceReceiveFromWind, ForceMode2D.Impulse);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
@@ -21,12 +22,15 @@ public class Bird : MonoBehaviour
     //進行率
     private float rate;
     private SpriteRenderer sprite;
+    //GameManagerのスクリプト
+    private GameManager gameManagerScript;
 
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetPosition = transform.position;
     }
 
@@ -70,7 +74,17 @@ public class Bird : MonoBehaviour
     {
         if(collision.tag == "Finish")
         {
-            print("OK!!");
+
+            rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+
+            if (SceneManager.GetActiveScene().buildIndex == 5)
+            {
+                gameManagerScript.StageClear();
+            }
+            else
+            {
+                gameManagerScript.StageClear();
+            }
         }
     }
 
@@ -80,6 +94,11 @@ public class Bird : MonoBehaviour
         {
             isMoving = false;
             rb2d.velocity = new Vector2(0, 0);
+        }
+
+        if(collision.gameObject.tag == "Needle")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

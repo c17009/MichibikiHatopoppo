@@ -6,6 +6,9 @@ TagManager:
   tags:
   - WindZone
   - Bubble
+  - WindEnd
+  - Bird
+  - Needle
   layers:
   - Default
   - TransparentFX
